@@ -16,16 +16,8 @@ static struct zmk_hid_keyboard_report keyboard_report = {
 
 static struct zmk_hid_consumer_report consumer_report = {.report_id = 2, .body = {.keys = {0}}};
 
-<<<<<<< HEAD
 static struct zmk_hid_mouse_report mouse_report = {.report_id = 3,
                                                    .body = {.buttons = 0, .x = 0, .y = 0}};
-||||||| parent of 9b099747 (Fine-tuning report, 16 buttons)
-static struct zmk_hid_mouse_report mouse_report = {.report_id = 3, .body = {
-    .buttons = 0, .x = 0, .y = 0}};
-=======
-static struct zmk_hid_mouse_report mouse_report = {.report_id = 4, .body = {
-    .buttons = 0, .x = 0, .y = 0}};
->>>>>>> 9b099747 (Fine-tuning report, 16 buttons)
 
 // Keep track of how often a modifier was pressed.
 // Only release the modifier if the count is 0.
@@ -287,43 +279,21 @@ static zmk_mod_flags_t explicit_buttons = 0;
     }
 
 int zmk_hid_mouse_button_press(zmk_mouse_button_t button) {
-<<<<<<< HEAD
     explicit_button_counts[button - 5]++;
     LOG_DBG("Button %d count %d", button, explicit_button_counts[button - 5]);
-||||||| parent of 9b099747 (Fine-tuning report, 16 buttons)
-    explicit_button_counts[button-5]++;
-    LOG_DBG("Button %d count %d", button, explicit_button_counts[button-5]);
-=======
-    explicit_button_counts[button]++;
-    LOG_DBG("Button %d count %d", button, explicit_button_counts[button]);
->>>>>>> 9b099747 (Fine-tuning report, 16 buttons)
     WRITE_BIT(explicit_buttons, button, true);
     SET_MOUSE_BUTTONS(explicit_buttons);
     return 0;
 }
 
 int zmk_hid_mouse_button_release(zmk_mouse_button_t button) {
-<<<<<<< HEAD
     if (explicit_button_counts[button - 5] <= 0) {
-||||||| parent of 9b099747 (Fine-tuning report, 16 buttons)
-    if (explicit_button_counts[button-5] <= 0) {
-=======
-    if (explicit_button_counts[button] <= 0) {
->>>>>>> 9b099747 (Fine-tuning report, 16 buttons)
         LOG_ERR("Tried to release button %d too often", button);
         return -EINVAL;
     }
     explicit_button_counts[button]--;
-<<<<<<< HEAD
     LOG_DBG("Button %d count: %d", button, explicit_button_counts[button - 5]);
     if (explicit_button_counts[button - 5] == 0) {
-||||||| parent of 9b099747 (Fine-tuning report, 16 buttons)
-    LOG_DBG("Button %d count: %d", button, explicit_button_counts[button-5]);
-    if (explicit_button_counts[button-5] == 0) {
-=======
-    LOG_DBG("Button %d count: %d", button, explicit_button_counts[button]);
-    if (explicit_button_counts[button] == 0) {
->>>>>>> 9b099747 (Fine-tuning report, 16 buttons)
         LOG_DBG("Button %d released", button);
         WRITE_BIT(explicit_buttons, button, false);
     }
