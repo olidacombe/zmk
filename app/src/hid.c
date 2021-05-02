@@ -16,8 +16,8 @@ static struct zmk_hid_keyboard_report keyboard_report = {
 
 static struct zmk_hid_consumer_report consumer_report = {.report_id = 2, .body = {.keys = {0}}};
 
-static struct zmk_hid_mouse_report mouse_report = {.report_id = 3,
-                                                   .body = {.buttons = 0, .x = 0, .y = 0}};
+static struct zmk_hid_mouse_report mouse_report = {
+    .report_id = 4, .body = {.buttons = 0, .x = 0, .y = 0, .wheel_vert = 0, .wheel_hor = 0}};
 
 // Keep track of how often a modifier was pressed.
 // Only release the modifier if the count is 0.
