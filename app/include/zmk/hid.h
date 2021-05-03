@@ -141,8 +141,20 @@ struct zmk_hid_consumer_report {
 
 struct zmk_hid_mouse_report_body {
     zmk_mouse_button_flags_t buttons;
+<<<<<<< HEAD
     int8_t x;
     int8_t y;
+||||||| parent of fdcd7241 (Mouse movement coordinate signedness consistency)
+    uint16_t x;
+    uint16_t y;
+    uint8_t wheel_vert;
+    uint8_t wheel_hor;
+=======
+    int16_t x;
+    int16_t y;
+    int8_t wheel_vert;
+    int8_t wheel_hor;
+>>>>>>> fdcd7241 (Mouse movement coordinate signedness consistency)
 } __packed;
 
 struct zmk_hid_mouse_report {
@@ -180,6 +192,18 @@ int zmk_hid_mouse_button_press(zmk_mouse_button_t button);
 int zmk_hid_mouse_button_release(zmk_mouse_button_t button);
 int zmk_hid_mouse_buttons_press(zmk_mouse_button_flags_t buttons);
 int zmk_hid_mouse_buttons_release(zmk_mouse_button_flags_t buttons);
+<<<<<<< HEAD
+||||||| parent of fdcd7241 (Mouse movement coordinate signedness consistency)
+int zmk_hid_mouse_movement_press(uint16_t x, uint16_t y);
+int zmk_hid_mouse_movement_release(uint16_t x, uint16_t y);
+int zmk_hid_mouse_wheel_press(uint8_t hor, uint8_t vert);
+int zmk_hid_mouse_wheel_release(uint8_t hor, uint8_t vert);
+=======
+int zmk_hid_mouse_movement_press(int16_t x, int16_t y);
+int zmk_hid_mouse_movement_release(int16_t x, int16_t y);
+int zmk_hid_mouse_wheel_press(int8_t hor, int8_t vert);
+int zmk_hid_mouse_wheel_release(int8_t hor, int8_t vert);
+>>>>>>> fdcd7241 (Mouse movement coordinate signedness consistency)
 void zmk_hid_mouse_clear();
 
 struct zmk_hid_keyboard_report *zmk_hid_get_keyboard_report();

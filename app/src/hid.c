@@ -288,14 +288,19 @@ int zmk_hid_mouse_buttons_release(zmk_mouse_button_flags_t buttons) {
         LOG_DBG("Mouse movement y set to 0x%02X", mouse_report.body.y);                            \
     }
 
-int zmk_hid_mouse_movement_press(uint16_t x, uint16_t y) {
+int zmk_hid_mouse_movement_press(int16_t x, int16_t y) {
     curr_x += x;
     curr_y += y;
     SET_MOUSE_MOVEMENT(curr_x, curr_y);
     return 0;
 }
 
-struct zmk_hid_keyboard_report *zmk_hid_get_keyboard_report() { return &keyboard_report; }
+int zmk_hid_mouse_movement_release(int16_t x, int16_t y) {
+    curr_x -= x;
+    curr_y -= y;
+    SET_MOUSE_MOVEMENT(curr_x, curr_y);
+    return 0;
+}
 
 #define SET_MOUSE_WHEEL(horiz, vertic)                                                             \
     {                                                                                              \
@@ -304,5 +309,25 @@ struct zmk_hid_keyboard_report *zmk_hid_get_keyboard_report() { return &keyboard
         mouse_report.body.wheel_vert = vertic;                                                     \
         LOG_DBG("Mouse wheel vert set to 0x%02X", mouse_report.body.wheel_vert);                   \
     }
+
+int zmk_hid_mouse_wheel_press(int8_t hor, int8_t vert) {
+    curr_hor += hor;
+    curr_vert += vert;
+    SET_MOUSE_WHEEL(curr_hor, curr_vert);
+    return 0;
+}
+
+int zmk_hid_mouse_wheel_release(int8_t hor, int8_t vert) {
+    curr_hor -= hor;
+    curr_vert -= vert;
+    SET_MOUSE_WHEEL(curr_hor, curr_vert);
+    return 0;
+}
+
+void zmk_hid_mouse_clear() { memset(&mouse_report.body, 0, sizeof(mouse_report.body)); }
+
+struct zmk_hid_keyboard_report *zmk_hid_get_keyboard_report() { return &keyboard_report; }
+
+struct zmk_hid_consumer_report *zmk_hid_get_consumer_report() { return &consumer_report; }
 
 struct zmk_hid_mouse_report *zmk_hid_get_mouse_report() { return &mouse_report; }
