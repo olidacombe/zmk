@@ -233,9 +233,9 @@ void zmk_hid_consumer_clear() { memset(&consumer_report.body, 0, sizeof(consumer
 static int explicit_button_counts[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 static zmk_mod_flags_t explicit_buttons = 0;
 
-#define SET_MOUSE_BUTTONS(butts)                                                                   \
+#define SET_MOUSE_BUTTONS(btns)                                                                    \
     {                                                                                              \
-        mouse_report.body.buttons = butts;                                                         \
+        mouse_report.body.buttons = btns;                                                          \
         LOG_DBG("Mouse buttons set to 0x%02X", mouse_report.body.buttons);                         \
     }
 
