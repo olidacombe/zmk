@@ -17,6 +17,7 @@ module.exports = {
       "features/encoders",
       "features/underglow",
       "features/backlight",
+      "features/trackballs",
       "features/beta-testing",
     ],
     Behaviors: [
@@ -28,19 +29,16 @@ module.exports = {
       "behaviors/mod-morph",
       "behaviors/sticky-key",
       "behaviors/sticky-layer",
-<<<<<<< HEAD
       "behaviors/caps-word",
       "behaviors/key-repeat",
-||||||| parent of 848f32c (Add the doc page to the sidebar)
-=======
       "behaviors/mouse-emulation",
->>>>>>> 848f32c (Add the doc page to the sidebar)
       "behaviors/reset",
       "behaviors/bluetooth",
       "behaviors/outputs",
       "behaviors/underglow",
       "behaviors/backlight",
       "behaviors/power",
+      "behaviors/trackball-pim447",
     ],
     Codes: [
       "codes/index",
