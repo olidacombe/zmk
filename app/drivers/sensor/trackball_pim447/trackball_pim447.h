@@ -8,6 +8,7 @@
 #define ZEPHYR_DRIVERS_SENSOR_TRACKBALL_PIM447_H_
 
 #include <drivers/i2c.h>
+#include <drivers/gpio.h>
 #include <drivers/sensor.h>
 #include <logging/log.h>
 
@@ -29,12 +30,12 @@ struct trackball_pim447_data {
     int32_t dz;
 #if CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT
     const struct device *gpio;
+    struct gpio_callback gpio_cb;
 #endif /* CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT */
 };
 
 #if CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT
-void setup_int(struct trackball_pim447_data *drv_data,
-			     bool enable);
+int trackball_pim447_init_interrupt(struct trackball_pim447_data *drv_data);
 #endif /* CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT */
 
 #endif /* ZEPHYR_DRIVERS_SENSOR_TRACKBALL_PIM447_H_ */

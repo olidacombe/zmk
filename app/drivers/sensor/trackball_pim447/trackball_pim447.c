@@ -134,7 +134,7 @@ static int trackball_pim447_init(const struct device *dev)
     }
 
 #if CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT
-    setup_int(data, true);
+    trackball_pim447_init_interrupt(data);
 #endif /* CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT */
 
     return 0;
