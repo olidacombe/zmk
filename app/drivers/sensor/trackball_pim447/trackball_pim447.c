@@ -133,6 +133,10 @@ static int trackball_pim447_init(const struct device *dev)
         return -EINVAL;
     }
 
+#if CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT
+    setup_int(data, true);
+#endif /* CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT */
+
     return 0;
 }
 

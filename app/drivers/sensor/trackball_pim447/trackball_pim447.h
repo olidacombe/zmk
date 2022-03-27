@@ -32,4 +32,9 @@ struct trackball_pim447_data {
 #endif /* CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT */
 };
 
+#if CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT
+void setup_int(struct trackball_pim447_data *drv_data,
+			     bool enable);
+#endif /* CONFIG_ZMK_TRACKBALL_PIM447_INTERRUPT */
+
 #endif /* ZEPHYR_DRIVERS_SENSOR_TRACKBALL_PIM447_H_ */
