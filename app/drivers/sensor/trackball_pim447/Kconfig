@@ -6,3 +6,8 @@ config ZMK_TRACKBALL_PIM447
 	depends on I2C
 	help
 	  Enable I2C-based driver for Pimoroni PIM447 trackball.
+
+config ZMK_TRACKBALL_PIM447_INTERRUPT
+	bool "ZMK PIM447 trackball interrupt mode"
+	depends on GPIO
+	select ZMK_TRACKBALL_PIM447

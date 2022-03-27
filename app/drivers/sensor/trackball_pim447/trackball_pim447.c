@@ -6,28 +6,9 @@
 
 #define DT_DRV_COMPAT pimoroni_trackball_pim447
 
-#include <drivers/i2c.h>
-#include <drivers/sensor.h>
+#include "trackball_pim447.h"
 
-#define LOG_LEVEL CONFIG_SENSOR_LOG_LEVEL
-#include <logging/log.h>
 LOG_MODULE_REGISTER(trackball_pim447);
-
-#define TRACKBALL_PIM447_REG_LEFT   0x04
-#define TRACKBALL_PIM447_REG_RIGHT  0x05
-#define TRACKBALL_PIM447_REG_UP     0x06
-#define TRACKBALL_PIM447_REG_DOWN   0x07
-#define TRACKBALL_PIM447_REG_SWITCH 0x08
-
-#define TRACKBALL_PIM447_REG_MIN    TRACKBALL_PIM447_REG_LEFT
-#define TRACKBALL_PIM447_REG_MAX    TRACKBALL_PIM447_REG_SWITCH
-
-struct trackball_pim447_data {
-    const struct device *i2c_dev;
-    int32_t dx;
-    int32_t dy;
-    int32_t dz;
-};
 
 static int trackball_pim447_read_reg(const struct device *dev,
                                      uint8_t reg, uint8_t *value)
