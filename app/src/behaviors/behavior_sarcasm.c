@@ -127,8 +127,8 @@ static int behavior_sarcasm_init(const struct device *dev) {
     static struct behavior_sarcasm_config behavior_sarcasm_config_##n = {                          \
         .index = n,                                                                                \
     };                                                                                             \
-    DEVICE_DT_INST_DEFINE(n, behavior_sarcasm_init, device_pm_control_nop,                         \
-                          &behavior_sarcasm_data_##n, &behavior_sarcasm_config_##n, APPLICATION,   \
+    DEVICE_DT_INST_DEFINE(n, behavior_sarcasm_init, NULL, &behavior_sarcasm_data_##n,              \
+                          &behavior_sarcasm_config_##n, APPLICATION,                               \
                           CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &behavior_sarcasm_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(KP_INST)
