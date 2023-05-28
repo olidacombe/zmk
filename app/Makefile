@@ -4,9 +4,15 @@
 build-%:
 	make _build-guppy_$*
 
-_build-%:
-	west build -p -d build/$* -- -DZMK_CONFIG="${HOME}/od/kbd/zmk-config/config" -DSHIELD=$*
+# OSX only rn, ensure this in ~/.lima/default/lima.yaml:
+# - location: "~/od/zmk"
+#   mountPoint: "/tmp/lima/zmk"
+#   writable: true
+builder:
+	docker run -it -v "${HOME}/od/zmk-config:/zmk-config" -e ZMK_CONFIG=/zmk-config/config -v "/tmp/lima/zmk:/zmk" docker.io/zmkfirmware/zmk-dev-arm:3.0
 
+_build-%:
+	west build -p -d build/$* -- -DZMK_CONFIG="${ZMK_CONFIG:-"${HOME}/od/zmk-config/config}" -DSHIELD=$*
 
 build:
 	make build-left
