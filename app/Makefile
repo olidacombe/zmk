@@ -9,10 +9,10 @@ build-%:
 #   mountPoint: "/tmp/lima/zmk"
 #   writable: true
 builder:
-	docker run -it -v "${HOME}/od/zmk-config:/zmk-config" -e ZMK_CONFIG=/zmk-config/config -v "/tmp/lima/zmk:/zmk" docker.io/zmkfirmware/zmk-dev-arm:3.0
+	docker run -it -v "$${HOME}/od/zmk-config:/zmk-config" -e ZMK_CONFIG=/zmk-config/config -v "/tmp/lima/zmk:/zmk" docker.io/zmkfirmware/zmk-dev-arm:3.0
 
 _build-%:
-	west build -p -d build/$* -- -DZMK_CONFIG="${ZMK_CONFIG:-"${HOME}/od/zmk-config/config}" -DSHIELD=$*
+	west build -p -b nice_nano_v2 -d build/$* -- -DZMK_CONFIG="$${ZMK_CONFIG:-"$${HOME}/od/zmk-config/config"}" -DSHIELD=$*
 
 build:
 	make build-left
