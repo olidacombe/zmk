@@ -4,7 +4,7 @@
 DOCKER := $(if $(shell [ "$$(uname)" = "Darwin" ] && echo true),lima nerdctl,docker)
 ZMK := $(if $(shell [ "$$(uname)" = "Darwin" ] && echo true),/tmp/lima/zmk,$${HOME}/od/zmk)
 
-BOARD ?= charybdis
+BOARD ?= tinkerball
 
 build-%:
 	make _build-${BOARD}_$*
