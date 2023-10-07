@@ -2,6 +2,7 @@
 .DEFAULT_GOAL := build
 
 DOCKER := $(if $(shell [ "$$(uname)" = "Darwin" ] && echo true),lima nerdctl,docker)
+IMAGE_NAME := zmk-builder
 ZMK := $(if $(shell [ "$$(uname)" = "Darwin" ] && echo true),/tmp/lima/zmk,$${HOME}/od/zmk)
 
 BOARD ?= tinkerball
@@ -14,7 +15,8 @@ build-%:
 #   mountPoint: "/tmp/lima/zmk"
 #   writable: true
 builder:
-	$(DOCKER) run -it -v "$${HOME}/od/zmk-config:/zmk-config" -e ZMK_CONFIG=/zmk-config/config -v "$(ZMK):/zmk" docker.io/zmkfirmware/zmk-dev-arm:3.2
+	$(DOCKER) build --no-cache -t $(IMAGE_NAME) .
+	$(DOCKER) run -it -v "$${HOME}/od/zmk-config:/zmk-config" -e ZMK_CONFIG=/zmk-config/config -v "$(ZMK):/zmk" $(IMAGE_NAME)
 
 _build-%:
 	west build -p -b nice_nano_v2 -d build/$* -- -DZMK_CONFIG="$${ZMK_CONFIG:-"$${HOME}/od/zmk-config/config"}" -DSHIELD=$*
@@ -34,4 +36,4 @@ flash:
 	make flash-left
 
 _nag:
-	west update 2>&1 | grep "git config" | xargs -0 bash -c
+	west update 2>&1 | grep "git config" | tee | xargs -0 bash -c
