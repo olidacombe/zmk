@@ -28,7 +28,7 @@ static zmk_mod_flags_t masked_modifiers = 0;
 
 #define SET_MODIFIERS(mods)                                                                        \
     {                                                                                              \
-        keyboard_report.body.modifiers = (mods | implicit_modifiers) & ~masked_modifiers;          \
+        keyboard_report.body.modifiers = (mods & ~masked_modifiers) | implicit_modifiers;          \
         LOG_DBG("Modifiers set to 0x%02X", keyboard_report.body.modifiers);                        \
     }
 
@@ -346,14 +346,8 @@ void zmk_hid_mouse_scroll_update(int8_t x, int8_t y) {
 }
 void zmk_hid_mouse_clear() { memset(&mouse_report.body, 0, sizeof(mouse_report.body)); }
 
-struct zmk_hid_keyboard_report *zmk_hid_get_keyboard_report() {
-    return &keyboard_report;
-}
+struct zmk_hid_keyboard_report *zmk_hid_get_keyboard_report() { return &keyboard_report; }
 
-struct zmk_hid_consumer_report *zmk_hid_get_consumer_report() {
-    return &consumer_report;
-}
+struct zmk_hid_consumer_report *zmk_hid_get_consumer_report() { return &consumer_report; }
 
-struct zmk_hid_mouse_report *zmk_hid_get_mouse_report() {
-    return &mouse_report;
-}
+struct zmk_hid_mouse_report *zmk_hid_get_mouse_report() { return &mouse_report; }
